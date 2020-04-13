@@ -2,9 +2,12 @@
 
 # dependencies
 /node_modules
+/config
+/playground
+/.vscode
 /.pnp
 .pnp.js
-
+# web.config
 # testing
 /coverage
 
@@ -17,6 +20,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
+OpenAPI_internal_affiliates.json
 
 npm-debug.log*
 yarn-debug.log*
