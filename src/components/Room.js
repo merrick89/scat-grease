@@ -10,12 +10,7 @@ class Room extends Component {
     success: false,
     data: {
       roomCode: this.props.roomCode,
-      playerList: [
-        {name: "Merrick", score:0},
-        {name: "Ymilie", score:0},
-        {name: "Beshan", score:0},
-        {name: "Aneesha", score:0}
-      ]
+      playerList: []
     }    
   }
 
@@ -32,7 +27,7 @@ class Room extends Component {
         this.setState({
           ...this.state,
           connected: true,
-          success:true,
+          success:data.success,
           data: data
         }) 
       })
@@ -86,7 +81,7 @@ class Room extends Component {
               }
             </React.Fragment>
           : 
-            <p>Attempting to reconnect...</p>
+            <p>Connecting...</p>
           }
           
       </div>

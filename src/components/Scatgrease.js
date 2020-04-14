@@ -22,9 +22,9 @@ class Scatgrease extends Component {
                     <form className="text-left">
                         {
                             questions.map( question => (
-                                <div className="form-group">
-                                    <label for="exampleInputPassword1">{question.text}</label>
-                                    <input type="text" className="form-control bg-dark border-0"  />
+                                <div className="form-group mb-4">
+                                    <label className="font-weight-bold">{question.text}</label>
+                                    <input type="text" className="form-control bg-dark border-0 text-white"  />
                                 </div>
                             ))
                         }
