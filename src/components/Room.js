@@ -20,7 +20,7 @@ class Room extends Component {
     const socket = socketIOClient(process.env.REACT_APP_GAME_URL); 
     
     socket.on("connect", () => {
-      console.log(this.state.roomCode)
+      console.log(this.state.data.roomCode)
       socket.emit("clientConnected", this.state.data.roomCode)
 
       socket.on("FromAPI", data => { 
@@ -53,7 +53,7 @@ class Room extends Component {
                     ? <div className="d-flex">
                         <div className="mr-3" style={{flex: 3}}>
                           <h3>Room Code: {data.roomCode}</h3>
-                          <Scatgrease roomCode={data.roomCode} letter={data.letter} questions={data.questions} timeStarted={data.timeStarted} />
+                          <Scatgrease roomId={data.roomId} roomCode={data.roomCode} letter={data.letter} questions={data.questions} timeStarted={data.timeStarted} />
                         </div>
                         <div style={{flex: 1}}>
                           <div className="card bg-dark">
@@ -61,9 +61,10 @@ class Room extends Component {
                             <div className="card-body m-0 p-0">
                               <table className="table table-striped table-dark m-0">
                                 <tbody>
-                                  { this.state.data.playerList.map(player => (
-                                    <tr>
-                                      <td>{player.name}</td>
+                                  {this.state.data.playerList.map((player, index) => (                                    
+                                    <tr key={player.name}>
+                                      <td>{index+1}.</td>
+                                      <td align="left">{player.name}</td>
                                       <td>{player.score}</td>
                                     </tr>
                                   ))}

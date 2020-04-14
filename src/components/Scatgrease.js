@@ -8,7 +8,26 @@ class Scatgrease extends Component {
 
     startGame = () => {
         //  Hit the endpoint to startGame
-        this.setState({started: true})
+        // POST request to /scatGrease/create
+    fetch(`${process.env.REACT_APP_API_URL}/startGame`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          roomCode: this.props.roomCode
+        })
+    })
+        .then(res => res.json())
+        .then(result => {
+            if (result["success"] === true) {
+              // Set state to started
+              this.setState({started: true})
+            } 
+        }).catch(error => {
+            console.log(error)
+        });
+        
     }
 
     render() { 
@@ -21,9 +40,9 @@ class Scatgrease extends Component {
                     <h1 class="alert alert-success">{letter}</h1>
                     <form className="text-left">
                         {
-                            questions.map( question => (
+                            questions.map( (question, index) => (
                                 <div className="form-group mb-4">
-                                    <label className="font-weight-bold">{question.text}</label>
+                                    <label className="font-weight-bold">{index+1}. {question.text}</label>
                                     <input type="text" className="form-control bg-dark border-0 text-white"  />
                                 </div>
                             ))
