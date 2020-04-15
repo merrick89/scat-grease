@@ -84,6 +84,10 @@ body {
   max-width:50px;
 }
 
+.sticky-card{
+  top: 10px;
+}
+
 @media (min-width: 48em) {
  .masthead-brand {
    float: left;

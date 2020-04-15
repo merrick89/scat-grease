@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import socketIOClient from "socket.io-client";
 import Scatgrease from './Scatgrease';
+import Cookies from 'universal-cookie';
+import Countdown from 'react-countdown';
+import moment from 'moment';
 
 class Room extends Component {
 
@@ -16,6 +19,13 @@ class Room extends Component {
 
   componentDidMount(){
 
+    const cookies = new Cookies();
+    var nickName;
+
+    if (cookies.get("nickName")){
+      nickName = cookies.get("nickName");
+    }    
+
     // We need to have a roomCode, and a cookie with the name to be in here.
     const socket = socketIOClient(process.env.REACT_APP_GAME_URL); 
     
@@ -28,7 +38,8 @@ class Room extends Component {
           ...this.state,
           connected: true,
           success:data.success,
-          data: data
+          data: data,
+          nickName: nickName
         }) 
       })
 
@@ -52,11 +63,11 @@ class Room extends Component {
                     {data
                     ? <div className="d-flex">
                         <div className="mr-3" style={{flex: 3}}>
-                          <h3>Room Code: {data.roomCode}</h3>
-                          <Scatgrease roomId={data.roomId} roomCode={data.roomCode} letter={data.letter} questions={data.questions} timeStarted={data.timeStarted} />
+                          <h3>Room Code: {data.roomCode} / You: {this.state.nickName}</h3>
+                          <Scatgrease roomId={data.roomId} roomCode={data.roomCode} letter={data.letter} questions={data.questions} timeStarted={data.timeStarted} status={data.status} />
                         </div>
                         <div style={{flex: 1}}>
-                          <div className="card bg-dark">
+                          <div className="card bg-dark position-sticky sticky-card">
                             <div className="card-header font-weight-bold">Players</div>
                             <div className="card-body m-0 p-0">
                               <table className="table table-striped table-dark m-0">
@@ -70,7 +81,14 @@ class Room extends Component {
                                   ))}
                                 </tbody>                              
                               </table>
-                            </div>                            
+                            </div>
+                            <div className="card-footer font-weight-bold">                              
+                              { data.status === 'playing' ?
+                                  <Countdown date={moment(data.timeStarted).add(process.env.REACT_APP_SECONDS_PER_ROUND, 'seconds').format()} />
+                                :
+                                  <div className="text-center">00:00:00:00</div>
+                              }                              
+                            </div>
                           </div>
                         </div>
                       </div>

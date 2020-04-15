@@ -44,7 +44,7 @@ class Home extends Component {
 
   handleJoinRoomCode = (event) => {
     const target = event.target;
-    const value = target.value;
+    const value = target.value.trim();
 
     if (value.length > 0){
       this.setState({
