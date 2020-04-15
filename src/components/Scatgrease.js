@@ -141,7 +141,12 @@ class Scatgrease extends Component {
                     <td align="left">{object.answer}</td>
                     <td>
                         <button className="btn btn-success btn-sm" onClick={() => {this.scoreAnswer(true, object.name, answerNumber)}}>Yee</button> &nbsp;
-                        <button className="btn btn-danger btn-sm" onClick={() => {this.scoreAnswer(false, object.name, answerNumber)}}>Naw</button> &nbsp;
+                        {
+                            object.score > 0 ?
+                                <button className="btn btn-danger btn-sm" onClick={() => {this.scoreAnswer(false, object.name, answerNumber)}}>Naw</button>
+                            :
+                                <button className="btn btn-secondary btn-sm" disabled>Naw</button>
+                        } &nbsp;                        
                         {object.score}
                     </td>
                 </tr>
