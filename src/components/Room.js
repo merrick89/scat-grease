@@ -62,11 +62,11 @@ class Room extends Component {
                 ? <React.Fragment>
                     {data
                     ? <div className="d-flex">
-                        <div className="mr-3" style={{flex: 3}}>
+                        <div style={{flex: 3}}>
                           <h3>Room Code: {data.roomCode} / You: {this.state.nickName}</h3>
-                          <Scatgrease roomId={data.roomId} roomCode={data.roomCode} letter={data.letter} questions={data.questions} timeStarted={data.timeStarted} status={data.status} />
+                          <Scatgrease roomId={data.roomId} roomCode={data.roomCode} letter={data.letter} questions={data.questions} timeStarted={data.timeStarted} status={data.status} playerList={data.playerList} />
                         </div>
-                        <div style={{flex: 1}}>
+                        <div className="ml-3" style={{flex: 1}}>
                           <div className="card bg-dark position-sticky sticky-card">
                             <div className="card-header font-weight-bold">Players</div>
                             <div className="card-body m-0 p-0">
