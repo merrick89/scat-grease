@@ -13,9 +13,9 @@ class Home extends Component {
   componentDidMount(){
     const cookies = new Cookies();
 
-    if (cookies.get("roomCode") && cookies.get("nickName")){
-      const roomCode = cookies.get("roomCode");
-      const nickName = cookies.get("nickName");
+    if (cookies.get("roomCode") || cookies.get("nickName")){
+      const roomCode = cookies.get("roomCode") ? cookies.get("roomCode") : '';
+      const nickName = cookies.get("nickName") ? cookies.get("nickName") : '';
 
       this.setState({
         roomCode: roomCode,
@@ -94,31 +94,12 @@ class Home extends Component {
     // Add the new player to the room (If it doesn't already exist)
     let { roomCode, nickName } = this.state;    
 
-    // POST request to /scatGrease/join
-    fetch(`${process.env.REACT_APP_API_URL}/join`, {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        roomCode: roomCode,
-        nickName: nickName
-      })
-  })
-      .then(res => res.json())
-      .then(result => {
-          if (result["success"] === true) {
-            // Set cookie for roomCode and nickName     
-            const cookies = new Cookies();
-            cookies.set('roomCode', roomCode, { path: '/', expires: new Date(Date.now()+3600000)});
-            cookies.set('nickName', nickName, { path: '/', expires: new Date(Date.now()+3600000) });
-            // Redirect to the room once it's been created
-            this.props.history.push(`room/scat-grease/${roomCode}`);
-          } 
-      }).catch(error => {
-          console.log(error)
-      });
-
+    // Set cookie for roomCode and nickName     
+    const cookies = new Cookies();
+    cookies.set('roomCode', roomCode, { path: '/', expires: new Date(Date.now()+3600000)});
+    cookies.set('nickName', nickName, { path: '/', expires: new Date(Date.now()+3600000) });
+    // Redirect to the room once it's been created
+    this.props.history.push(`room/scat-grease/${roomCode}`);
   }
 
   render(){

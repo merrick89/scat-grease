@@ -16,8 +16,8 @@ class Layout extends Component {
                     {this.props.children}
                 </main>
                 <footer className="mastfoot mt-auto">
-                    <div className="inner text-center">
-                    <p>Created by <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/channel/UC3_Uk6dwwmHatTL-afDOZyg">Merrick</a></p>
+                    <div className="inner text-center m-3">
+                        <p>Created by <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/channel/UC3_Uk6dwwmHatTL-afDOZyg">Merrick</a></p>
                     </div>
                 </footer>
             </div>

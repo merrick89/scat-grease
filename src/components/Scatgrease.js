@@ -136,7 +136,7 @@ class Scatgrease extends Component {
                 score: Object.keys(player.answers).length ? player.answers[answerNumber].score : 0
             }
             return (
-                <tr>
+                <tr key={object.name}>
                     <td>{object.name}</td>
                     <td align="left">{object.answer}</td>
                     <td>

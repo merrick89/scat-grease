@@ -24,7 +24,33 @@ class Room extends Component {
 
     if (cookies.get("nickName")){
       nickName = cookies.get("nickName");
-    }    
+    } else {
+      // If no nickname cookie... move them to the home page so they have to re-enter..
+      // But we can set the roomName cookie, so it's pre-filled
+      cookies.set('roomCode', this.props.roomCode, { path: '/', expires: new Date(Date.now()+3600000)});
+      this.props.history.push(`/`);
+      return;
+    }
+
+    // Join the room. POST request to /scatGrease/join
+    fetch(`${process.env.REACT_APP_API_URL}/join`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        roomCode: this.state.data.roomCode,
+        nickName: nickName
+      })
+    })
+      .then(res => res.json())
+      .then(result => {
+          if (result["success"] === true) {
+            console.log("Joined room.")
+          } 
+      }).catch(error => {
+          console.log(error)
+      });
 
     // We need to have a roomCode, and a cookie with the name to be in here.
     const socket = socketIOClient(process.env.REACT_APP_GAME_URL); 
@@ -66,7 +92,7 @@ class Room extends Component {
                           <h3>Room Code: {data.roomCode} / You: {this.state.nickName}</h3>
                           <Scatgrease roomId={data.roomId} roomCode={data.roomCode} letter={data.letter} questions={data.questions} timeStarted={data.timeStarted} status={data.status} playerList={data.playerList} />
                         </div>
-                        <div className="ml-3" style={{flex: 1}}>
+                        <div className="ml-3 infoTab" style={{flex: 1}}>
                           <div className="card bg-dark position-sticky sticky-card">
                             <div className="card-header font-weight-bold">Players</div>
                             <div className="card-body m-0 p-0">

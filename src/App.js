@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <Layout>
         <Switch>
-          <Route path={"/room/:game/:roomCode?"} render={(props)=> <Room key={props.match.params.roomCode} game={props.match.params.game} roomCode={props.match.params.roomCode} />}/>
+          <Route path={"/room/:game/:roomCode?"} render={(props)=> <Room key={props.match.params.roomCode} game={props.match.params.game} roomCode={props.match.params.roomCode} history={props.history} />}/>
           <Route path={"/"} render={(props)=> <Home history={props.history} />} />
         </Switch>
       </Layout>
