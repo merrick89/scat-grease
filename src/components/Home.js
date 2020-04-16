@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import warning from '../assets/images/warning.png';
 import ReactToolTip from 'react-tooltip';
 import Cookies from 'universal-cookie';
+import newgame from '../assets/images/newgame.png';
+import joingame from '../assets/images/joingame.png';
 
 class Home extends Component {
 
@@ -106,23 +108,25 @@ class Home extends Component {
     return(
       <React.Fragment>
         <div className="text-center p-3 mb-3">
-          <div className="mb-3">
+          <div>
             <img className="icon" src={warning} alt="Warning! Adult themed game"/>
             <h3>WARNING</h3>
-            Adult themed game.
+            <p>Adult themed game.</p>
+            <p className="text-info pb-0 mb-0"><strong>Rules</strong>: You get <strong>1 letter</strong> and <strong>12 questions</strong>. Your answers must all start with the letter. You have <strong>2 minutes</strong>.</p>
           </div>
         </div>
         <div className="text-center p-3 mb-3" style={{backgroundColor:"RGBA(255,255,255,0.05)"}}>
           <ReactToolTip />          
           <div className="mb-3">
             <h4 className="mb-3">1. Choose a nickname</h4>
-            <input type="text" className="form-control w-50 m-auto" placeholder="Nickname" onChange={(e) => this.handleCreateNickname(e)} value={this.state.nickName} />
+            <input type="text" className="form-control w-50 m-auto text-center bg-dark border-0 text-white" placeholder="Enter a nickname" onChange={(e) => this.handleCreateNickname(e)} value={this.state.nickName} />
           </div>          
         </div>
-        <div className="text-center p-3" style={{backgroundColor:"RGBA(255,255,255,0.05)"}}>
-          <h4>2. Create or join a room</h4>
-          <div className="d-flex justify-content-around align-items-center">
+        <div className="text-center p-3" style={{backgroundColor:"RGBA(255,255,255,0.05)"}}>          
+          <div className="d-flex justify-content-around align-items-center">            
             <div className="w-50 p-5 border-right">
+              <h4>Create a Room</h4>
+              <img className="display-block" src={newgame} alt="Create Game" /><br />
             { this.state.nickName
               ?
                 <button className="btn btn-success" onClick={this.createRoom}>Create a Room</button>  
@@ -131,8 +135,10 @@ class Home extends Component {
             }
             </div>
             <div className="w-50 p-5">
+              <h4>Join a Room</h4>
+              <img className="display-block" style={{maxWidth: "100px"}} src={joingame} alt="Join Game" /><br />
               <div className="mb-3">
-                <input type="text" className="form-control w-100 m-auto" placeholder="Enter a room code" onChange={(e) => this.handleJoinRoomCode(e)} value={this.state.roomCode} />
+                <input type="text" className="form-control w-100 m-auto text-center bg-dark border-0 text-white" placeholder="Enter a room code" style={{maxWidth: "200px"}} onChange={(e) => this.handleJoinRoomCode(e)} value={this.state.roomCode} />
               </div>
               { this.state.nickName && this.state.roomCode
                 ?
