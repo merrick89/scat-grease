@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter} from 'react-router-dom';
 
-const app = <BrowserRouter><App /></BrowserRouter>;
+const app = <BrowserRouter basename='/scatGrease'><App /></BrowserRouter>;
 
 ReactDOM.render(app, document.getElementById('root'));
 
