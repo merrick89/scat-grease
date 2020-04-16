@@ -83,7 +83,7 @@ class Home extends Component {
               cookies.set('roomCode', roomCode, { path: '/', expires: new Date(Date.now()+3600000)});
               cookies.set('nickName', this.state.nickName, { path: '/', expires: new Date(Date.now()+3600000) });
               // Redirect to the room once it's been created
-              this.props.history.push(`room/scat-grease/${roomCode}`);
+              this.props.history.push(`/room/scat-grease/${roomCode}`);
             } 
         }).catch(error => {
             console.log(error)
@@ -99,7 +99,7 @@ class Home extends Component {
     cookies.set('roomCode', roomCode, { path: '/', expires: new Date(Date.now()+3600000)});
     cookies.set('nickName', nickName, { path: '/', expires: new Date(Date.now()+3600000) });
     // Redirect to the room once it's been created
-    this.props.history.push(`room/scat-grease/${roomCode}`);
+    this.props.history.push(`/room/scat-grease/${roomCode}`);
   }
 
   render(){
