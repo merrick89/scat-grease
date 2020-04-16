@@ -88,6 +88,19 @@ body {
   top: 10px;
 }
 
+.countdown-custom{
+  font-size: 1.5em;
+}
+
+.mobile-countdown{
+  z-index: 9990;
+  position:fixed !important;
+  float:right;
+  display: none;
+  right: 40px;
+  top:20px;
+}
+
 @media (min-width: 48em) {
  .masthead-brand {
    float: left;
@@ -101,6 +114,9 @@ body {
   /* For mobile phones: */
   .infoTab{
     display:none;
+  }
+  .mobile-countdown{
+    display: block;
   }
 }
 

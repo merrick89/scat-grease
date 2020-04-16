@@ -87,9 +87,14 @@ class Room extends Component {
               {success
                 ? <React.Fragment>
                     {data
-                    ? <div className="d-flex">
+                    ? <div className="d-flex flex-wrap">
                         <div style={{flex: 3}}>
                           <h3>Room Code: {data.roomCode} / You: {this.state.nickName}</h3>
+                          <div className="position-relative">
+                            <div className="alert alert-info mb-0 p-1 mobile-countdown">
+                              <Countdown date={moment(data.timeStarted).add(process.env.REACT_APP_SECONDS_PER_ROUND, 'seconds').format()} />
+                            </div>
+                          </div>
                           <Scatgrease roomId={data.roomId} roomCode={data.roomCode} letter={data.letter} questions={data.questions} timeStarted={data.timeStarted} status={data.status} playerList={data.playerList} />
                         </div>
                         <div className="ml-3 infoTab" style={{flex: 1}}>
@@ -108,12 +113,14 @@ class Room extends Component {
                                 </tbody>                              
                               </table>
                             </div>
-                            <div className="card-footer font-weight-bold">                              
-                              { data.status === 'playing' ?
-                                  <Countdown date={moment(data.timeStarted).add(process.env.REACT_APP_SECONDS_PER_ROUND, 'seconds').format()} />
-                                :
-                                  <div className="text-center">00:00:00:00</div>
-                              }                              
+                            <div className="card-footer font-weight-bold countdown-custom">
+                              <div className="alert alert-info mb-0 p-1">
+                                { data.status === 'playing' ?
+                                    <Countdown date={moment(data.timeStarted).add(process.env.REACT_APP_SECONDS_PER_ROUND, 'seconds').format()} />
+                                  :
+                                    <div className="text-center">00:00:00:00</div>
+                                }
+                              </div>                          
                             </div>
                           </div>
                         </div>
