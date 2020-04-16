@@ -126,7 +126,7 @@ class Home extends Component {
           <div className="d-flex justify-content-around align-items-center">            
             <div className="w-50 p-5 border-right">
               <h4>Create a Room</h4>
-              <img className="display-block" src={newgame} alt="Create Game" /><br />
+              <img className="display-block" style={{width: "100%", maxWidth: "100px"}} src={newgame} alt="Create Game" /><br />
             { this.state.nickName
               ?
                 <button className="btn btn-success" onClick={this.createRoom}>Create a Room</button>  
@@ -136,7 +136,7 @@ class Home extends Component {
             </div>
             <div className="w-50 p-5">
               <h4>Join a Room</h4>
-              <img className="display-block" style={{maxWidth: "100px"}} src={joingame} alt="Join Game" /><br />
+              <img className="display-block" style={{width: "100%", maxWidth: "100px"}} src={joingame} alt="Join Game" /><br />
               <div className="mb-3">
                 <input type="text" className="form-control w-100 m-auto text-center bg-dark border-0 text-white" placeholder="Enter a room code" style={{maxWidth: "200px"}} onChange={(e) => this.handleJoinRoomCode(e)} value={this.state.roomCode} />
               </div>
