@@ -123,8 +123,8 @@ class Home extends Component {
           </div>          
         </div>
         <div className="text-center p-3" style={{backgroundColor:"RGBA(255,255,255,0.05)"}}>          
-          <div className="d-flex justify-content-around align-items-center">            
-            <div className="w-50 p-5 border-right">
+          <div className="d-flex flex-wrap justify-content-around align-items-center">            
+            <div className="w-50 p-5 createRoom" style={{minWidth: "250px"}}>
               <h4>Create a Room</h4>
               <img className="display-block" style={{width: "100%", maxWidth: "100px"}} src={newgame} alt="Create Game" /><br />
             { this.state.nickName
@@ -134,7 +134,7 @@ class Home extends Component {
                 <button className="btn btn-secondary" onClick={this.createRoom} disabled data-tip="Type in your name first!">Create a Room</button>          
             }
             </div>
-            <div className="w-50 p-5">
+            <div className="w-50 p-5" style={{minWidth: "250px"}}>
               <h4>Join a Room</h4>
               <img className="display-block" style={{width: "100%", maxWidth: "100px"}} src={joingame} alt="Join Game" /><br />
               <div className="mb-3">
