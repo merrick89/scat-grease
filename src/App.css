@@ -101,6 +101,10 @@ body {
   top:20px;
 }
 
+.createRoom{
+  border-right:1px solid RGBA(255,255,255,0.2)
+}
+
 @media (min-width: 48em) {
  .masthead-brand {
    float: left;
@@ -117,6 +121,13 @@ body {
   }
   .mobile-countdown{
     display: block;
+  }
+}
+
+@media only screen and (max-width: 629px) {
+  .createRoom{
+    border-right:none;
+    border-bottom:1px solid RGBA(255,255,255,0.2)
   }
 }
 
