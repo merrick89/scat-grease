@@ -9,7 +9,8 @@ class Home extends Component {
 
   state = {
     nickName: '',
-    roomCode: ''
+    roomCode: '',
+    loading: false
   }
 
   componentDidMount(){
@@ -21,7 +22,8 @@ class Home extends Component {
 
       this.setState({
         roomCode: roomCode,
-        nickName: nickName
+        nickName: nickName,
+        loading: false
       })
     }    
   }
@@ -65,6 +67,8 @@ class Home extends Component {
 
   createRoom = () => {
     // Create a new room in the DB 
+    this.setState({...this.state, loading:true})    
+
     // POST request to /scatGrease/create
     fetch(`${process.env.REACT_APP_API_URL}/create`, {
         method: 'POST',
@@ -78,7 +82,8 @@ class Home extends Component {
         .then(res => res.json())
         .then(result => {
             if (result["success"] === true) {
-              // Grab the roomCode from the response             
+              this.setState({...this.state, loading:false})
+              // Grab the roomCode from the response
               let roomCode = result.data.roomCode;
               // Set cookie for roomCode and nickName     
               const cookies = new Cookies();
@@ -127,12 +132,16 @@ class Home extends Component {
             <div className="w-50 p-5 createRoom" style={{minWidth: "250px"}}>
               <h4>Create a Room</h4>
               <img className="display-block" style={{width: "100%", maxWidth: "100px"}} src={newgame} alt="Create Game" /><br />
-            { this.state.nickName
-              ?
-                <button className="btn btn-success" onClick={this.createRoom}>Create a Room</button>  
-              :          
-                <button className="btn btn-secondary" onClick={this.createRoom} disabled data-tip="Type in your name first!">Create a Room</button>          
-            }
+              {
+                this.state.loading ?
+                  <button className="btn btn-secondary" disabled>Entering Room...</button>
+                :
+                  this.state.nickName
+                  ?
+                    <button className="btn btn-success" onClick={this.createRoom}>Create a Room</button>
+                  :          
+                    <button className="btn btn-secondary" onClick={this.createRoom} disabled data-tip="Type in your name first!">Create a Room</button>  
+              }
             </div>
             <div className="w-50 p-5" style={{minWidth: "250px"}}>
               <h4>Join a Room</h4>
